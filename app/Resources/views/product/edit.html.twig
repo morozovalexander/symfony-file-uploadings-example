@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block container %}
+    <h1>Edit product #{{ product.id }}</h1>
+
+    {{ form_start(edit_form) }}
+    {{ form_row(edit_form.name) }}
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Current image</label>
+        <div class="col-sm-10">
+            {% if product.image %}
+                <img src="{{ asset('uploads/images/' ~ product.image.filename) }}" width="200" height="200"/>
+            {% else %}
+                no image file
+            {% endif %}
+        </div>
+    </div>
+    {{ form_row(edit_form.image) }}
+    <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+            <input type="submit" value="Edit" class="btn btn-success"/>
+        </div>
+    </div>
+    {{ form_end(edit_form) }}
+
+    <div class="col-md-5 col-md-offset-2 ">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="{{ path('app_product_list') }}">Back to the list</a>
+            </li>
+            <li class="list-group-item">
+                {{ form_start(delete_form, { 'attr': {'class': 'bootbox-submit-confirm'} }) }}
+                {{ form_widget(delete_form) }}
+                <input type="submit" value="Delete" class="btn btn-danger"/>
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+{% endblock %}

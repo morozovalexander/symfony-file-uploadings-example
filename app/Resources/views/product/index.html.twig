@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block container %}
+    <h1>Products list</h1>
+    <table class="records_list table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>
+                    {% if product.image %}
+                        <img src="{{ asset('uploads/images/' ~ product.image.filename) }}" width="200" height="200"/>
+                    {% else %}
+                        no image file
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <p>
+        <a href="{{ path('app_product_new') }}">
+            <span class="glyphicon glyphicon-plus"></span> Add new
+        </a>
+    </p>
+{% endblock %}
