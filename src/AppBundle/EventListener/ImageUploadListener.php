@@ -39,6 +39,11 @@ class ImageUploadListener
     public function preRemove(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
+
+        if (!$entity instanceof Product) {
+            return;
+        }
+
         /** @var File $imageFile */
         $imageFile = $entity->getImage();
 
