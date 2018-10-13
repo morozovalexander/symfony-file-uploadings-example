@@ -1,7 +1,7 @@
 {
     "name": "alexander/uploading",
-    "license": "proprietary",
     "type": "project",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "": "src/"
@@ -20,7 +20,7 @@
         ]
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": "^5.5.9|>=7.0.8",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
         "doctrine/orm": "^2.5",
@@ -30,7 +30,7 @@
         "symfony/monolog-bundle": "^3.0.2",
         "symfony/polyfill-apcu": "^1.0",
         "symfony/swiftmailer-bundle": "^2.3.10",
-        "symfony/symfony": "3.2.*",
+        "symfony/symfony": "3.4.*",
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
