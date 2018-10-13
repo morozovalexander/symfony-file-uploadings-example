@@ -83,6 +83,10 @@ class ImageUploadListener
      */
     private function uploadFile($entity)
     {
+        if (!method_exists($entity, 'getImage') || !method_exists($entity, 'setImage')) {
+            return; //todo: probably can add an interface for image holder entities
+        }
+
         // upload only works for Product entities
         if (!$entity instanceof Product) {
             return;
