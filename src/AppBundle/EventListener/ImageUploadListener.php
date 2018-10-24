@@ -2,11 +2,11 @@
 
 namespace AppBundle\EventListener;
 
+use AppBundle\Entity\ImageHolderInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use AppBundle\Entity\Product;
 use AppBundle\Service\FileUploader;
 
 class ImageUploadListener
@@ -40,7 +40,7 @@ class ImageUploadListener
     {
         $entity = $args->getEntity();
 
-        if (!$entity instanceof Product) {
+        if (!$entity instanceof ImageHolderInterface) {
             return;
         }
 
@@ -66,7 +66,7 @@ class ImageUploadListener
 
         $oldImage = $args->getOldValue('image');
 
-        if (is_null($args->getNewValue('image'))) {
+        if (null === $args->getNewValue('image')) {
             // don't overwrite if no file submitted
             $entity->setImage($oldImage);
         } else {
@@ -83,12 +83,8 @@ class ImageUploadListener
      */
     private function uploadFile($entity)
     {
-        if (!method_exists($entity, 'getImage') || !method_exists($entity, 'setImage')) {
-            return; //todo: probably can add an interface for image holder entities
-        }
-
-        // upload only works for Product entities
-        if (!$entity instanceof Product) {
+        // upload only works for ImageHolderInterface entities
+        if (!$entity instanceof ImageHolderInterface) {
             return;
         }
 
@@ -112,7 +108,7 @@ class ImageUploadListener
     {
         $entity = $args->getEntity();
 
-        if (!$entity instanceof Product) {
+        if (!$entity instanceof ImageHolderInterface) {
             return;
         }
 

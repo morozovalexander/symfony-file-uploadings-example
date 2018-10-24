@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
  */
-class Product
+class Product implements ImageHolderInterface
 {
     /**
      * @var int
@@ -74,23 +74,15 @@ class Product
     }
 
     /**
-     * Set image
-     *
-     * @param string $image
-     *
-     * @return Product
+     * @inheritdoc
      */
     public function setImage($image)
     {
         $this->image = $image;
-
-        return $this;
     }
 
     /**
-     * Get image
-     *
-     * @return string
+     * @inheritdoc
      */
     public function getImage()
     {
